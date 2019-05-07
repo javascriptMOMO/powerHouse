@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="live">
     <video
       id="myPlayer"
       poster="https://file.digitaling.com/eImg/uimages/20150907/1441607120885946.gif"
@@ -29,4 +29,16 @@ export default {
 };
 </script>
 <style scoped>
+.live{
+  width: 100%;
+  height: 100%;
+}
+#myPlayer{
+  width: 100%;
+  height: 100%;
+}
+#myPlayerflashId{
+  width: 100%;
+  height: 100%;
+}
 </style>

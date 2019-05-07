@@ -36,23 +36,31 @@ export default {
               //外圆内径大小
               lineStyle: {
                 // 属性lineStyle控制线条样式
-                width: 6
+                width: 6,
+                shadowColor: "#ffffff",
+                shadowBlur: 1
               }
             },
             axisTick: {
               // 坐标轴小标记
-              length: 1, // 属性length控制线长
+              length: 10, // 属性length控制线长
               lineStyle: {
                 // 属性lineStyle控制线条样式
-                color: "auto"
+                width: 2,
+                color: "auto",
+                shadowColor: "#ffffff",
+                shadowBlur: 10
               }
             },
             splitLine: {
               // 分隔线
-              length: 1, // 属性length控制线长
+              length: 20, // 属性length控制线长
               lineStyle: {
                 // 属性lineStyle（详见lineStyle）控制线条样式
-                color: "auto"
+                width: 3,
+                color: "auto",
+                shadowColor: "#ffffff",
+                shadowBlur: 10
               }
             },
             // axisLabel: {
@@ -106,7 +114,6 @@ export default {
     };
   },
   created() {
-    console.log(this.chartType);
     const { name, code, value, min, max } = this.chartType;
     this.option.series[0].data[0].value = value;
     this.option.series[0].min = min;
@@ -117,13 +124,18 @@ export default {
   methods: {
     chartInit() {
       this.circleChart = echarts.init(this.$refs.chart);
-      setInterval(() => {
-        this.option.series[0].data[0].value =
-          (Math.random() * 200).toFixed(0) - 0;
-        this.circleChart.setOption(this.option, true);
-      }, 200);
-      // this.option.series[0].data[0].value = this.chartType.value;
-      // this.circleChart.setOption(this.option);
+      this.option.series[0].data[0].value = this.chartType.value;
+      this.circleChart.setOption(this.option);
+    }
+  },
+  watch: {
+    "chartType.value": {
+      handler(val) {
+        console.log("数据发生变化", val);
+        this.option.series[0].data[0].value = val;
+        this.circleChart.setOption(this.option);
+      },
+      deep: true
     }
   },
   mounted() {
